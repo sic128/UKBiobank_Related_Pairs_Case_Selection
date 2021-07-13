@@ -30,9 +30,11 @@
 # Note 5: Pihat and kinship are not the same. UKBB by default gives a file with kinship values which we use as the input relatedness file for simplicity,
 #         but the --pihat flag requires a pihat threshold. 2*kinship=pihat. See below for pihat values and its corresponding relationship.
 # Note 6: Outputs a file with one column containing IIDs of the unrelated subset that maximizes case individuals.
+# Note
 
 # Argument --pheno: Phenotype file (Two column "IID Phenotype" ): Should only contain 3 class of values in the second column: 
 #                   Case Indicator, Control Indicator, and NA. Case-Control Indicator Coding can be user specified, but missing must be set to "NA".  
+
     
     
         # Example Phenotype File:
