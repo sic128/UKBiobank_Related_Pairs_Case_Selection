@@ -24,7 +24,7 @@
 ##################################################################################################
 # READ NOTES:
 # Note 1: Input files are assumed to be space delimited with no headers. 
-# Note 2: FID and IID should be the same.
+# Note 2: Uses only the IID column for analysis. Assumes that FID=IID but only looks at IID.
 # Note 3: Assumes that the kinship file contains all relationships amongst your samples.
 # Note 4: If samples are missing phenotype, imputing NA for the sample
 # Note 5: Pihat and kinship are not the same. UKBB by default gives a file with kinship values which we use as the input relatedness file for simplicity,
@@ -197,6 +197,10 @@ def dict_Pheno(phenotype,case_value):
             result = "NA"
         else:
             result = int(0)
+        # Check to see if multiple pheno entries per IID
+        if row['IID'] in pheno_dict:
+            print("Single IID corresponds to multiple phenotype values... Stopping Script!")
+            sys.exit()
         # Add to dictionary
         pheno_dict[row['IID']] = result
 
