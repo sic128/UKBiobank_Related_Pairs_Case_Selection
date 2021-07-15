@@ -30,7 +30,7 @@
 # Note 5: Pihat and kinship are not the same. UKBB by default gives a file with kinship values which we use as the input relatedness file for simplicity,
 #         but the --pihat flag requires a pihat threshold. 2*kinship=pihat. See below for pihat values and its corresponding relationship.
 # Note 6: Outputs a file with one column containing IIDs of the unrelated subset that maximizes case individuals.
-# Note
+# Note 7: Script was designed for UKBB Samples, but can really be used on any cohort as long as the inputs are correct.
 
 # Argument --pheno: Phenotype file (Two column "IID Phenotype" ): Should only contain 3 class of values in the second column: 
 #                   Case Indicator, Control Indicator, and NA. Case-Control Indicator Coding can be user specified, but missing must be set to "NA".  
@@ -84,7 +84,6 @@ import time
 import sys
 import os
 
-
 # Name: check_Pheno 
 # Description: Check if phenotype file second column contains only 3 types of values (Case value, Control Value and NA) 
 #
@@ -113,11 +112,11 @@ def check_Pheno(pheno):
 #
 # Output : Array : First element of array is score. Second element is how many relatives it has.
 
-# Outputs a dataframe with two columns, these samples are related to each other according to the pihat threshold
+# Outputs a dataframe with two columns, these samples are related to each other according to the pihat threshold. dtypes str
 def get_Related(all_samples,kinship_file,kinship_threshold):
 
     # Load kinship file
-    kinship = pd.read_csv(kinship_file,header=None,names=["IID1","IID2","Kinship"],delimiter=" ")
+    kinship = pd.read_csv(kinship_file,header=None,names=["IID1","IID2","Kinship"],delimiter=" ", converters = {'Kinship': float,'IID1': str,'IID2': str})
     # Filter kinship file so that pairs that are remaining are all in sample file
     kinship2 = kinship[kinship.IID1.isin(all_samples.IID)]
     kinship3 = kinship2[kinship2.IID2.isin(all_samples.IID)]
@@ -151,13 +150,15 @@ def get_Strict_Unrelated(related_people,all_samples):
 # Description: Filter out phenotype file and make sure that all samples we are running the script on has 
 #              phenotypes. If sample doesn't have phenotype, impute NA.
 #
-# Parameters (2) : 1. pheno_file (str): input phenotype file path 
+# Parameters (3) : 1. pheno_file (str): input phenotype file path 
 #                  2. related people (pd data frame) : data frame created with two columns: IID1,IID2
 #                     These are related pairs of people.  
+#                  3. all_samples (pd data frame): dataframe with two columns: FID,IID. All samples 
+#                     we are considering
 #
 # Output : pd data frame with two columns (IID Status) 
 
-def get_Pheno(pheno_file,related_people):
+def get_Pheno(pheno_file,related_people,all_samples):
    
     # Load pheno file
     pheno = pd.read_csv(pheno_file,header=None,names=["FID","IID","Status"],delimiter=" ",dtype=str)  
@@ -171,8 +172,10 @@ def get_Pheno(pheno_file,related_people):
     # Merge
     joined = pd.merge(list_related,pheno,on='IID',how='left')
     joined_filter = joined[["IID","Status"]]
+    # Make sure our pheno file only contains samples from all_samples subset list
+    joined_filter2 = joined_filter[joined_filter['IID'].isin(all_samples.IID)]
     
-    return joined_filter
+    return joined_filter2
 
 # Name: dict_Pheno 
 # Description: Exporting phenotype file into a dictionary 
@@ -308,8 +311,13 @@ def calculate_score_nas(ID,phenotype_dict,relatedness_df):
 
 def main(args):
 
+    # Start Time Output
+    localtime = time.asctime( time.localtime(time.time()) )
+    print(" ")
+    print("Starting Related Pair Case Prioritization Script...")
+    print(f'Start Time: {localtime}')
+
     ### Output input paramters
-    print("Starting Related Pair Case Prioritization for UKBB samples...")
     print(" ")
     print("~~~~~~~~~~~ Input Parameters ~~~~~~~~~~~~~~~~~")
     print(f'Pheno File: {args.pheno}')
@@ -328,11 +336,11 @@ def main(args):
     check_Pheno(args.pheno)
 
     # Load Samples and print total number of samples
-    all_samples = pd.read_csv(args.samples,header=None,names=["FID","IID"],delimiter=" ")
+    all_samples = pd.read_csv(args.samples,header=None,names=["FID","IID"],delimiter=" ",dtype=str)
     print(f'Total number of samples: {len(all_samples.index)}')
     
     # Generate a Table of the related People. Output a pandas dataframe with two columns IID1 and IID2 in which individuals are related 
-    # to each other 
+    # to each other. dtype str 
     related_people = get_Related(all_samples,args.kinship,kinship)
     print(f'Number of related pairs: {len(related_people.index)}')
     # Make sure both columns are strings
@@ -340,20 +348,16 @@ def main(args):
     
 
     # Generate a Table of people who are not related to anyone based on pihat value
+    # dtype = str
     unrelated_strict = get_Strict_Unrelated(related_people,all_samples)
     print(f'Number of people who are not related to anyone else: {len(unrelated_strict)}')
 
     # Filter out phenotype file and make sure that all samples we are running the script on has phenotypes
-    # If sample doesn't have phenotype, impute NA 
-    final_pheno = get_Pheno(args.pheno,related_people)
+    # If sample doesn't have phenotype, impute NA. Also subset this pheno list to subjects in the all samples list. 
+    # dtype = str
+    final_pheno = get_Pheno(args.pheno,related_people,all_samples)
     print(f'Number of people who have relatedness: {len(final_pheno.index)}')
  
-    # Start Time Output
-    localtime = time.asctime( time.localtime(time.time()) )
-    print(" ")
-    print("Starting Selection Step")
-    print(f'Start Time: {localtime}')
-
     # Make a phenotype dictionary where key is ID and maps to phenotype status
     phenotype = dict_Pheno(final_pheno,args.case_value)
 
