@@ -315,6 +315,21 @@ def calculate_score_nas(ID,phenotype_dict,relatedness_df):
 
 def main(args):
 
+    # Dealing with kinship/pihat flag
+    pihat_bool=True
+    if args.kinship_threshold is None and args.pihat is None:
+        print("Exactly one of either --kinship_threshold or --pihat required") 
+        sys.exit()
+    elif args.kinship_threshold is not None and args.pihat is None:
+        pihat_bool=False
+        kinship=args.kinship_threshold
+    elif args.kinship_threshold is None and args.pihat is not None:
+        kinship = args.pihat/2
+    else:
+        print("Both --pihat and --kinship_threshold used. Please only use one or the other")
+        sys.exit()
+        
+    
     # Start Time Output
     localtime = time.asctime( time.localtime(time.time()) )
     print(" ")
@@ -327,16 +342,16 @@ def main(args):
     print(f'Pheno File: {args.pheno}')
     print(f'Kinship File: {args.kinship}')
     print(f'Samples File: {args.samples}')
+    if (pihat_bool == True):
+        print(f'Pihat Threshold: {args.pihat}')
+    else:
+        print(f'Kinship Threshold: {args.kinship_threshold}')
     print(f'Case Value: {args.case_value}')
-    print(f'Pihat Threshold: {args.pihat}')
     print(f'Output File: {args.output}')
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     print(" ")
-    
-    # Make kinship variable
-    kinship = args.pihat/2
-
-    # Check if phenotype file second column contains the correct values
+   
+    # Check if phenotype file third column contains the correct values
     check_Pheno(args.pheno)
 
     # Load Samples and print total number of samples
@@ -344,7 +359,8 @@ def main(args):
     print(f'Total number of samples: {len(all_samples.index)}')
     
     # Generate a Table of the related People. Output a pandas dataframe with two columns IID1 and IID2 in which individuals are related 
-    # to each other. dtype str 
+    # to each other. 
+    # dtype str 
     related_people = get_Related(all_samples,args.kinship,kinship)
     print(f'Number of related pairs: {len(related_people.index)}')
     # Make sure both columns are strings
@@ -667,10 +683,11 @@ def main(args):
 parser = argparse.ArgumentParser()
 parser.add_argument('--pheno', help=' Phenotype file (FID IID Phenotype)', type=str,required=True)
 parser.add_argument('--case_value', help='Which case indicator/value are we prioritizing', type=str,required=True)
-parser.add_argument('--pihat', help='Pihat threshold', type=float,required=True)
 parser.add_argument('--output', help='Output Name', type=str,required=True)
 parser.add_argument('--kinship', help='Kinship File (FID IID Kinship)', type=str,required=True)
 parser.add_argument('--samples', help='List of all samples (FID IID)', type=str,required=True)
+parser.add_argument('--pihat', help='Pihat threshold', type=float,required=False)
+parser.add_argument('--kinship_threshold', help='Kinship threshold', type=float,required=False)
 
 if __name__ == '__main__':
 	args = parser.parse_args()
