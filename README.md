@@ -32,5 +32,8 @@ TODO
 TODO
 ```
 
+## Running the software on dbGaP cohorts
+TODO
+
 ## Contact
 Steven Cao(email: yic127@ucsd.edu) developed and maintains this software.
