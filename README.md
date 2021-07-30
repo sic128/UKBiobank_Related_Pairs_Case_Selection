@@ -33,7 +33,7 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
 ### Inputs
 
 ##### `--pheno` 
-#### Required
+##### Required
 Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class of values in the second column: Case Indicator, Control Indicator, and NA. Case-Control Indicator Coding can be user specified, but missing must be set to "NA".
 
 
@@ -48,12 +48,12 @@ Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class 
 
 
 ##### `--case_value`
-#### Required
+##### Required
 Which Value in phenotype file second column represents cases. Specify indicator code (Number/Alpha/Text) to select cases (Alternatively can be used to select controls)
 
 
 ##### `--pihat`
-#### Optional
+##### Optional
 Pihat threshold (Optional Flag, can use --kinship_threshold instead)
 Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
 
@@ -68,12 +68,12 @@ Note: Anyone pair of relationship below the chosen pihat threshold will be consi
 
 
 ##### `--kinship_threshold`
-#### Optional
+##### Optional
 Kinship threshold (Optional Flag, can use --pihat instead)
 
 
 ##### `--kinship`
-#### Required
+##### Required
 UKBB kinship file. Three columns: "FID IID Kinship". Space delimited and no header.
 
         # Example Kinship File:
@@ -87,7 +87,7 @@ UKBB kinship file. Three columns: "FID IID Kinship". Space delimited and no head
 
 
 ##### `--samples`
-#### Required
+##### Required
 UKBB full list of samples we are considering. Two columns: "FID IID", Space delimited, no headers.
 
          #Example UKBB sample File:
@@ -99,7 +99,7 @@ UKBB full list of samples we are considering. Two columns: "FID IID", Space deli
 
 
 ##### `--output`
-#### Required
+##### Required
 Output file name
 
 ### Sample command
