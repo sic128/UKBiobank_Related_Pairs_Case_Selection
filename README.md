@@ -48,12 +48,12 @@ Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class 
 
 
 ##### `--case_value`
-Required
+####Required
 Which Value in phenotype file second column represents cases. Specify indicator code (Number/Alpha/Text) to select cases (Alternatively can be used to select controls)
 
 
 ##### `--pihat`
-Optional
+####Optional
 Pihat threshold (Optional Flag, can use --kinship_threshold instead)
 Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
 
