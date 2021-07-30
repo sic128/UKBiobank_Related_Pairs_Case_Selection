@@ -32,7 +32,7 @@
 # Note 6: Outputs a file with one column containing IIDs of the unrelated subset that maximizes case individuals.
 # Note 7: Script was designed for UKBB Samples, but can really be used on any cohort as long as the inputs are correct.
 
-# Argument --pheno: Phenotype file (Two column "IID Phenotype" ): Should only contain 3 class of values in the second column: 
+# Argument --pheno: Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class of values in the second column: 
 #                   Case Indicator, Control Indicator, and NA. Case-Control Indicator Coding can be user specified, but missing must be set to "NA".  
 
     
@@ -62,11 +62,23 @@
         # 0.0625  First-Cousins once removed
         # 0.03125 Fourth Degree Relatives (Second-Cousins)
 
-# Arg --output: Output name
+# Argument --kinship_threshold: Kinship Threshold. Accepts a numeric value, and can be used in place of --pihat.
 
-# Arg --kinship: UKBB kinship file: Three columns: "FID IID Kinship"
+# Argument --output: Output name
 
-# Arg --samples: UKBB full list of samples we are considering. Two columns: "FID IID"
+# Argument --kinship: UKBB kinship file: Three columns: "FID IID Kinship". Space delimited, no header.
+
+
+        # Example Kinship File:
+        ##############
+        #IID1 IID2 0.5
+        #IID2 IID3 0.25
+        #IID1 IID3 0.15
+        #IID5 IID6 0.03
+        #IID7 IID8 0.4
+        ##############
+
+# Argument --samples: UKBB full list of samples we are considering. Two columns: "FID IID". Space delimited, no header.
 
          #Example UKBB sample File:
          ####################
@@ -136,7 +148,7 @@ def get_Related(all_samples,kinship_file,kinship_threshold):
 #                  2. all_samples (pd data frame) : dataframe with two columns: FID,IID. All samples 
 #                     we are considering. 
 #
-# Output : pd data frame with two columns: FID,IID 
+# Output : pd data frame with two columns: FID,IID. dtype=str
 
 def get_Strict_Unrelated(related_people,all_samples):
 
@@ -156,7 +168,7 @@ def get_Strict_Unrelated(related_people,all_samples):
 #                  3. all_samples (pd data frame): dataframe with two columns: FID,IID. All samples 
 #                     we are considering
 #
-# Output : pd data frame with two columns (IID Status) 
+# Output : pd data frame with two columns (IID Status) dtype=str 
 
 def get_Pheno(pheno_file,related_people,all_samples):
    
