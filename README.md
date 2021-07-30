@@ -33,8 +33,11 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
 ### Inputs
 
 ##### `--pheno` 
-##### Required
-Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class of values in the second column: Case Indicator, Control Indicator, and NA. Case-Control Indicator Coding can be user specified, but missing must be set to "NA".
+   - Required
+   - Phenotype file 
+   - Three column "FID IID Phenotype"  
+   - Should only contain 3 class of values in the second column: Case Indicator, Control Indicator, and NA. 
+   - Case-Control Indicator Coding can be user specified, but missing must be set to "NA".
 
 
         # Example Phenotype File:
@@ -48,14 +51,15 @@ Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class 
 
 
 ##### `--case_value`
--Required Flag
-Which Value in phenotype file second column represents cases. Specify indicator code (Number/Alpha/Text) to select cases (Alternatively can be used to select controls)
+   - Required Flag
+   - Which Value in phenotype file second column represents cases
+   - Specify indicator code (Number/Alpha/Text) to select cases (Alternatively can be used to select controls)
 
 
 ##### `--pihat`
-##### Optional
-Pihat threshold (Optional Flag, can use --kinship_threshold instead)
-Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
+   - Optional
+   - Pihat threshold (Optional Flag, can use --kinship_threshold instead)
+   - Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
 
         # For reference:
         # Pihat   Relationship
@@ -68,13 +72,15 @@ Note: Anyone pair of relationship below the chosen pihat threshold will be consi
 
 
 ##### `--kinship_threshold`
-##### Optional
-Kinship threshold (Optional Flag, can use --pihat instead)
+   - Optional
+   - Kinship threshold (Optional Flag, can use --pihat instead)
 
 
 ##### `--kinship`
-##### Required
-UKBB kinship file. Three columns: "FID IID Kinship". Space delimited and no header.
+   - Required
+   - Three columns: "FID IID Kinship"
+   - Space delimited and no header
+   - UKBB kinship file
 
         # Example Kinship File:
         ##############
@@ -87,8 +93,10 @@ UKBB kinship file. Three columns: "FID IID Kinship". Space delimited and no head
 
 
 ##### `--samples`
-##### Required
-UKBB full list of samples we are considering. Two columns: "FID IID", Space delimited, no headers.
+   - Required
+   - Two columns: "FID IID"
+   - Space delimited, no headers
+   - UKBB full list of samples we are considering 
 
          #Example UKBB sample File:
          ####################
@@ -99,8 +107,8 @@ UKBB full list of samples we are considering. Two columns: "FID IID", Space deli
 
 
 ##### `--output`
-##### Required
-Output file name
+   - Required
+   - Output file name
 
 ### Sample command
 ```
