@@ -40,7 +40,7 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
    - Case-Control Indicator Coding can be user specified, but missing must be set to "NA".
 
 
-        # Example Phenotype File:
+        #Example Phenotype File:
         ##############
         #FID1 IID1 0
         #FID2 IID2 0
@@ -82,7 +82,7 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
    - Space delimited and no header
    - UKBB kinship file
 
-        # Example Kinship File:
+        #Example Kinship File:
         ##############
         #IID1 IID2 0.5
         #IID2 IID3 0.25
