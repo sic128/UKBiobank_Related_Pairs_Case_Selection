@@ -61,14 +61,14 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
    - Pihat threshold (Optional Flag, can use --kinship_threshold instead)
    - Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
 
-        # For reference:
-        # Pihat   Relationship
-        # 1       Identical twins
-        # 0.5     First Degree Relative (Siblings, Parents, Children)
-        # 0.25    Second Degree Relatives (grandparents, grandchildren, aunts, uncles, nephews, nieces or half-siblings)
-        # 0.125   Third Degree Relatives (first-cousins, great-grandparents or great grandchildren)
-        # 0.0625  First-Cousins once removed
-        # 0.03125 Fourth Degree Relatives (Second-Cousins)
+        #For reference:
+        #Pihat   Relationship
+        #1       Identical twins
+        #0.5     First Degree Relative (Siblings, Parents, Children)
+        #0.25    Second Degree Relatives (grandparents, grandchildren, aunts, uncles, nephews, nieces or half-siblings)
+        #0.125   Third Degree Relatives (first-cousins, great-grandparents or great grandchildren)
+        #0.0625  First-Cousins once removed
+        #0.03125 Fourth Degree Relatives (Second-Cousins)
 
 
 ##### `--kinship_threshold`
