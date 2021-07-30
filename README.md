@@ -1,5 +1,5 @@
 # UKBiobank_Related_Pairs_Case_Selection v1
-Given a phenotype list of individuals in UKBB, this script generates an unrelated subset that maximizes case individuals, based on a designated pihat (or kinship) value.
+Given a phenotype list of individuals in UK Biobank (UKBB) , this script generates an unrelated subset that maximizes case individuals, based on a designated pihat (or kinship) value.
 
 ## Getting started
 
@@ -121,7 +121,7 @@ python3 Related_Pair_Selection_UKBB.py \
 --output output
 ```
 
-## Running the software on dbGaP cohorts
+## Running the software on database for genotype and phenotype (dbGaP) cohorts
 TODO
 
 ## Contact
