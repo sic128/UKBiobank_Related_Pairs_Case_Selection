@@ -32,7 +32,8 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
 ## Flags for analysis
 ### Inputs
 
-##### `--pheno`
+##### `--pheno` 
+Required
 Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class of values in the second column: Case Indicator, Control Indicator, and NA. Case-Control Indicator Coding can be user specified, but missing must be set to "NA".
 
 
@@ -47,11 +48,13 @@ Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class 
 
 
 ##### `--case_value`
+Required
 Which Value in phenotype file second column represents cases. Specify indicator code (Number/Alpha/Text) to select cases (Alternatively can be used to select controls)
 
 
 ##### `--pihat`
-Pihat threshold
+Optional
+Pihat threshold (Optional Flag, can use --kinship_threshold instead)
 Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
 
         # For reference:
@@ -65,20 +68,49 @@ Note: Anyone pair of relationship below the chosen pihat threshold will be consi
 
 
 ##### `--kinship_threshold`
-Kinship threshold
+Optional
+Kinship threshold (Optional Flag, can use --pihat instead)
+
 
 ##### `--kinship`
-UKBB kinship file. Three columns: "FID IID Kinship"
+Required
+UKBB kinship file. Three columns: "FID IID Kinship". Space delimited and no header.
+
+        # Example Kinship File:
+        ##############
+        #IID1 IID2 0.5
+        #IID2 IID3 0.25
+        #IID1 IID3 0.15
+        #IID5 IID6 0.03
+        #IID7 IID8 0.4
+        ##############
+
 
 ##### `--samples`
-TODO
+Required
+UKBB full list of samples we are considering. Two columns: "FID IID", Space delimited, no headers.
+
+         #Example UKBB sample File:
+         ####################
+         #FID1 IID1
+         #FID2 IID2
+         #FID3 IID3
+         ####################
+
 
 ##### `--output`
-Output file
+Required
+Output file name
 
 ### Sample command
 ```
-TODO
+python3 Related_Pair_Selection_UKBB.py \
+--pheno pheno.txt \
+--case_value 1 \
+--pihat 0.0884  \
+--kinship kinship.txt \
+--samples sample.txt \
+--output output
 ```
 
 ## Running the software on dbGaP cohorts
