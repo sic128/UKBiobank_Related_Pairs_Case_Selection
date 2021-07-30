@@ -125,4 +125,4 @@ python3 Related_Pair_Selection_UKBB.py \
 TODO
 
 ## Contact
-Steven Cao(email: yic127@ucsd.edu) developed and maintains this software.
+Steven Cao (email: yic127@ucsd.edu) maintains this software.
