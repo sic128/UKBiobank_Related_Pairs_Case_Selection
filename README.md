@@ -16,7 +16,7 @@ Some Data files will be required to run UKBiobank_Related_Pairs_Case_Selection. 
 The format is described below
 
 1. Kinship File
-   - Three columns: "FID IID Kinship"
+   - Three columns: "IID1 IID2 Kinship"
    - Space Delimited, no header
 2. Phenotype File
    - Three columns: "FID IID Phenotype"
