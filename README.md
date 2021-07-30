@@ -12,7 +12,7 @@ Given a phenotype list of individuals in UK Biobank (UKBB) , this script generat
 - os
 
 #### Data
-Some Data files will be required to run UKBiobank_Related_Pairs_Case_Selection. Files need to be downloaded from UK Biobank and modified to ensure the correct format.
+Some data files will be required to run UKBiobank_Related_Pairs_Case_Selection. Files need to be downloaded from UK Biobank and modified to ensure the correct format.
 The format is described below
 
 1. Kinship File
