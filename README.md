@@ -48,7 +48,7 @@ Phenotype file (Three column "FID IID Phenotype" ): Should only contain 3 class 
 
 
 ##### `--case_value`
-##### Required
+-Required Flag
 Which Value in phenotype file second column represents cases. Specify indicator code (Number/Alpha/Text) to select cases (Alternatively can be used to select controls)
 
 
