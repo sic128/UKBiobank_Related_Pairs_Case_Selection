@@ -40,14 +40,14 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
    - Case-Control Indicator Coding can be user specified, but missing must be set to "NA".
 
 
-        #Example Phenotype File:
-        ##############
-        #FID1 IID1 0
-        #FID2 IID2 0
-        #FID3 IID3 NA
-        #FID4 IID4 1
-        #FID5 IID5 0
-        ##############
+         #Example Phenotype File:
+         ##############
+         #FID1 IID1 0
+         #FID2 IID2 0
+         #FID3 IID3 NA
+         #FID4 IID4 1
+         #FID5 IID5 0
+         ##############
 
 
 ##### `--case_value`
@@ -61,14 +61,14 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
    - Pihat threshold (Optional Flag, can use --kinship_threshold instead)
    - Note: Anyone pair of relationship below the chosen pihat threshold will be considered unrelated. Pairs that are above the chosen pihat threshold are considered related.
 
-        #For reference:
-        #Pihat   Relationship
-        #1       Identical twins
-        #0.5     First Degree Relative (Siblings, Parents, Children)
-        #0.25    Second Degree Relatives (grandparents, grandchildren, aunts, uncles, nephews, nieces or half-siblings)
-        #0.125   Third Degree Relatives (first-cousins, great-grandparents or great grandchildren)
-        #0.0625  First-Cousins once removed
-        #0.03125 Fourth Degree Relatives (Second-Cousins)
+         #For reference:
+         #Pihat   Relationship
+         #1       Identical twins
+         #0.5     First Degree Relative (Siblings, Parents, Children)
+         #0.25    Second Degree Relatives (grandparents, grandchildren, aunts, uncles, nephews, nieces or half-siblings)
+         #0.125   Third Degree Relatives (first-cousins, great-grandparents or great grandchildren)
+         #0.0625  First-Cousins once removed
+         #0.03125 Fourth Degree Relatives (Second-Cousins)
 
 
 ##### `--kinship_threshold`
@@ -82,14 +82,14 @@ For a typical analysis on UK Biobank (UKBB), use kinship file provided by UKBB a
    - Space delimited and no header
    - UKBB kinship file
 
-        #Example Kinship File:
-        ##############
-        #IID1 IID2 0.5
-        #IID2 IID3 0.25
-        #IID1 IID3 0.15
-        #IID5 IID6 0.03
-        #IID7 IID8 0.4
-        ##############
+         #Example Kinship File:
+         ##############
+         #IID1 IID2 0.5
+         #IID2 IID3 0.25
+         #IID1 IID3 0.15
+         #IID5 IID6 0.03
+         #IID7 IID8 0.4
+         ##############
 
 
 ##### `--samples`
